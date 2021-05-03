@@ -1,12 +1,8 @@
 package com.vishal.vkiit;
 
 import com.vishal.vkiit.config.VkiitConfigurationProperties;
-import com.vishal.vkiit.domain.Comment;
-import com.vishal.vkiit.domain.Link;
-import com.vishal.vkiit.repository.CommentRepository;
-import com.vishal.vkiit.repository.LinkRepository;
+import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -25,17 +21,10 @@ public class VkiitApplication {
         SpringApplication.run(VkiitApplication.class, args);
     }
 
-//    @Bean
-    CommandLineRunner runner(LinkRepository linkRepository, CommentRepository commentRepository) {
-        return args -> {
-            Link link = new Link("Getting Started with Spring boot 2","https://www.danvega.dev/docs/spring-boot-2-docs/");
-            linkRepository.save(link);
+    @Bean
+    PrettyTime prettyTime(){
+        return new PrettyTime();
+    }
 
-            Comment comment = new Comment("This spring boot 2 link is awesome!!", link);
-            commentRepository.save(comment);
-
-            link.addComment(comment);
-        };
-   }
 
 }
